@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {nanoid} from 'nanoid'
 import { FormWrap, Form, Text, Input, Button} from './ContactForm.styled'
 
-export default class ContactForm extends Component {
-  state = {
+const ContactForm = ({addContact}) => {
+  
+const [dataForm, setDataForm] = useState({
     name: '',
     number: '',
-  };
-
-  handleInputChange = evt => {
-    this.setState({
+  })
+  const handleInputChange = evt => {
+    
+    setDataForm({...dataForm,
       [evt.target.name]: evt.target.value,
     });
   };
 
-  handleSubmit = (evt) => {
+  const handleSubmit = (evt) => {
       evt.preventDefault();
-      const { name, number} = this.state;
+      const { name, number} = dataForm;
 
       const newContact = {
         id: nanoid(),
@@ -25,40 +26,41 @@ export default class ContactForm extends Component {
     
       }
 
-      this.props.addContact(newContact)
+      addContact(newContact)
 
-      this.setState({
+      setDataForm({
         name: '',
         number: '',
       });
   
-  }
-  render() {
-    const { name, number } = this.state;
+  };
+
+ 
+ 
     return (
       <FormWrap>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <label>
             <Text>Name</Text>
             <Input
-              onChange={this.handleInputChange}
+              onChange={handleInputChange}
               type="text"
               placeholder="Enter name"
   
               name="name"
-              value={name}
+              value={dataForm.name}
               required
             />
           </label>
           <label>
             <Text>Number</Text>
             <Input
-              onChange={this.handleInputChange}
+              onChange={handleInputChange}
               type="tel"
               placeholder="Enter number"
               
               name="number"
-              value={number}
+              value={dataForm.number}
               required
             />
           </label>
@@ -67,5 +69,7 @@ export default class ContactForm extends Component {
         </Form>
       </FormWrap>
     );
-  }
+
 }
+
+export default ContactForm
