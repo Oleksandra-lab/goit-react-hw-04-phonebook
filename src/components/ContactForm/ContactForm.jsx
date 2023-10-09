@@ -10,7 +10,7 @@ const [dataForm, setDataForm] = useState({
   })
   const handleInputChange = evt => {
     
-    setDataForm({...dataForm,
+    setDataForm({
       [evt.target.name]: evt.target.value,
     });
   };
