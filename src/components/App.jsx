@@ -40,11 +40,11 @@ const App = () => {
   };
 
   const deleteContact = id => {
-    setContacts(contacts => contacts.filter(contact => contact.id !== id));
+    setContacts(contacts.filter(contact => contact.id !== id));
   };
 
   const onFilter = name => {
-    setFilter({ filter: name.toLowerCase() });
+    setFilter(name.toLowerCase());
   };
 
   const filteredContacts = () => {
