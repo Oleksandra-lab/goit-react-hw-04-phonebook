@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {nanoid} from 'nanoid'
 import { FormWrap, Form, Text, Input, Button} from './ContactForm.styled'
 
-const ContactForm = ({addContact}) => {
+const ContactForm = ({onAddContact}) => {
   
 const [dataForm, setDataForm] = useState({
     name: '',
@@ -11,6 +11,7 @@ const [dataForm, setDataForm] = useState({
   const handleInputChange = evt => {
     
     setDataForm({
+      ...dataForm,
       [evt.target.name]: evt.target.value,
     });
   };
@@ -26,7 +27,7 @@ const [dataForm, setDataForm] = useState({
     
       }
 
-      addContact(newContact)
+      onAddContact(newContact)
 
       setDataForm({
         name: '',

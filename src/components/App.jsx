@@ -39,10 +39,9 @@ const App = () => {
     setFilter(filter);
   };
 
-  const getFilteredContacts = () => {
+  const getFilteredContacts = 
     contacts.filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase()));
-  };
-const filteredContacts = getFilteredContacts()
+// const filteredContacts = getFilteredContacts()
   return (
     <div>
       <h1>Phonebook</h1>
@@ -50,7 +49,7 @@ const filteredContacts = getFilteredContacts()
       <Filter onFilter={handleFilterChange} />
       <h2>Contacts</h2>
       <ContactList
-        contacts={filteredContacts}
+        contacts={getFilteredContacts}
         onDeleteContact={deleteContact}
       />
     </div>
