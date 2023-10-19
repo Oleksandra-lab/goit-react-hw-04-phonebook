@@ -1,7 +1,7 @@
 import React from 'react';
 import {ContactItem, ContactName, ContactNumber, DeleteBtn} from './ContactList.styled'
 
-const ContactList = ({ contacts, deleteContact }) => {
+const ContactList = ({ contacts, onDeleteContact }) => {
   console.log(contacts);
   return (
   
@@ -12,7 +12,7 @@ const ContactList = ({ contacts, deleteContact }) => {
           id={id}
           name={name}
           number={number}
-          deleteContact={deleteContact}
+          deleteContact={onDeleteContact}
         />
       ))}
     </ul>

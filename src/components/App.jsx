@@ -6,15 +6,13 @@ import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+
+    return JSON.parse(localStorage.getItem('contacts')) ?? []
+
+  });
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const stringifiedContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(stringifiedContacts) ?? [];
-    setContacts(parsedContacts);
-  }, []);
-
+  
   useEffect(() => {
     const stringifiedContacts = JSON.stringify(contacts);
     localStorage.setItem('contacts', stringifiedContacts);
@@ -28,11 +26,13 @@ const App = () => {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
-    setContacts([...contacts, newContact]);
+    setContacts((prevContacts) => [...prevContacts, newContact]);
   };
 
   const deleteContact = id => {
-    setContacts(contacts.filter(contact => contact.id !== id));
+    setContacts((prevContacts) =>
+      prevContacts.filter((contact) => contact.id !== id)
+    );
   };
 
   const handleFilterChange = filter => {
